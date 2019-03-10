@@ -2,23 +2,19 @@
 
 let abelar number = number%12=0 && 12<number && number<3097
 
-let area b h = 
-    match b>=0.0 && h>=0.0 with
+let area b h = match b>=0.0 && h>=0.0 with
     | true -> (b/2.0)*h
     | _ -> failwith "There's a negative value!"
 
-let zollo number =
-    match number<0 with
+let zollo number = match number<0 with
     | true -> number*(-1)
     | _ -> number*2
 
-let min (a: int) (b: int) =
-    match a>=b with
+let min (a: int) (b: int) = match a>=b with
     | true -> b
     | _ -> a
 
-let max a b =
-    match a>b with
+let max a b = match a>b with
     | true -> a
     | _ -> b
 
@@ -52,8 +48,7 @@ let isLeap year =
     | _ -> false
 
 
-let month number = 
-    match number>0 && number<=12,number with
+let month number = match number>0 && number<=12,number with
     | true,1 -> "January",31
     | true,2 -> "February",28
     | true,3 -> "March",31
@@ -68,21 +63,17 @@ let month number =
     | true,12 -> "December",31
     | _ -> failwith "Input is greater than 12"
 
-let toBinary num =
-    match num<0,num=0 with
+let toBinary num = match num<0,num=0 with
     | true,false -> failwith ""
     | false,true -> "0"
-    | _ -> 
-        let rec solveBinary theValue binValue =
-            match theValue=0 with
-            | true -> binValue
-            | _ -> 
-                let n =
-                    match theValue%2=0 with 
-                    | true -> "0"  
-                    | false -> "1"
-                solveBinary (theValue/2) (n + binValue )
-        solveBinary num ""
+    | _ ->  let rec solveBinary theValue binValue = match theValue=0 with
+                | true -> binValue
+                | _ -> 
+                    let n = match theValue%2=0 with 
+                        | true -> "0"  
+                        | false -> "1"
+                    solveBinary (theValue/2) (n + binValue )
+            solveBinary num ""
 
 let bizFuzz number =
     match number>2 with
@@ -112,4 +103,4 @@ let monthDay day year =
             GetTheMonth day 1
            
 let coord _ =
-    failwith "Not implemented"
+    failwith ""
