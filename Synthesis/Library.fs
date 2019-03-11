@@ -1,5 +1,7 @@
 ﻿module Synthesis
 
+open System
+
 let abelar number = number%12=0 && 12<number && number<3097
 
 let area b h = match b>=0.0 && h>=0.0 with
@@ -101,6 +103,22 @@ let monthDay day year =
                 | false -> thisMonth
                 | true -> GetTheMonth (daysLeft-amendDays) (monthNum+1)
             GetTheMonth day 1
-           
-let coord _ =
-    failwith ""
+ 
+let sqr n =
+    let rec calculate guess i =
+       match i with 
+       | 10 -> guess
+       | _ -> 
+            let g = (guess + n/guess)/2.0
+            calculate g (i+1)
+    match n <= 0.0 with 
+    | true -> failwith "Failed"
+    | _ -> calculate (n/2.0) 0
+
+let coord input =
+    let co1, co2 = input
+    let x1, y1 = co1
+    let x2, y2 = co2
+    let dist = fun (x1,y1) (x2,y2) -> sqr (((x1-x2)**2.0)+((y1-y2)**2.0))
+    let within = fun (x1,y1) (x2,y2) -> sqr (((x1-x2)**2.0)+((y1-y2)**2.0))
+    dist (0.0,0.0), within (11.0,2.0)
