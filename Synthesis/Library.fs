@@ -117,8 +117,6 @@ let sqr n =
 
 let coord input =
     let co1, co2 = input
-    let x1, y1 = co1
-    let x2, y2 = co2
-    let dist = fun (x1,y1) (x2,y2) -> sqr (((x1-x2)**2.0)+((y1-y2)**2.0))
-    let within = fun (x1,y1) (x2,y2) -> sqr (((x1-x2)**2.0)+((y1-y2)**2.0))
-    dist (0.0,0.0), within (11.0,2.0)
+    let dist = fun (x,y) -> sqr (((co1-x)**2.0)+((co2-y)**2.0))
+    let within = fun (x,y) width height -> (co1>=x && co1<=(x+width))&&(co2<=y && co2>=(y-height))
+    dist,within
