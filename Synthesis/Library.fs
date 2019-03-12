@@ -77,13 +77,16 @@ let toBinary num = match num<0,num=0 with
                     solveBinary (theValue/2) (n + binValue )
             solveBinary num ""
 
-let bizFuzz number =
-    match number>2 with
+let bizFuzz number = match number>2 with
     | true -> 
-        let for3 = number/3
-        let for4 = number/5
-        let for3n5 = (number/3)/5
-        for3,for4,for3n5
+        let rec counter numCount divNum acc = match numCount <= number with
+            | false -> acc
+            | true ->
+                let n = match numCount%divNum=0 with
+                    | true -> acc+1
+                    | false -> acc
+                counter (numCount+1) divNum n
+        ((counter 3 3 0), (counter 3 5 0), ((counter 3 3 0)+(counter 3 5 0))/8)
     | _ -> 0,0,0
 
 let monthDay day year =
